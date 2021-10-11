@@ -8,13 +8,16 @@ function PageContent(props) {
           {props.header ? props.header : <br />}
         </h2>
       </Wrapper>
-      {props.children.map((element, index) => {
-        return (
-          <Wrapper centered={props.centered} key={index}>
-            {element}
-          </Wrapper>
-        );
-      })}
+      {props.children &&
+        (Array.isArray(props.children)
+          ? props.children.map((element, index) => {
+              return (
+                <Wrapper centered={props.centered} key={index}>
+                  {element}
+                </Wrapper>
+              );
+            })
+          : props.children)}
     </div>
   );
 }
