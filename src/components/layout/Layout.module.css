@@ -1,0 +1,83 @@
+/* .left-nav {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 2px 5px 5px rgb(0, 0, 0, 0.05);
+  grid-area: leftNav;
+  background-color: white;
+}
+.grid-container {
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-template-columns: 0.3fr 1.6fr;
+  grid-template-rows: 0.14fr 2.3fr;
+  gap: 0px 0px;
+  grid-template-areas:
+    "leftNav topBar"
+    "leftNav appBody";
+}
+
+.top-bar {
+  background-color: white;
+  box-shadow: 0 2px 5px 5px rgb(0, 0, 0, 0.01);
+  width: 100%;
+  grid-area: topBar;
+}
+
+.app-container {
+  overflow-y: scroll;
+  grid-area: appBody;
+}
+*/
+
+.logo {
+  margin-top: 2px;
+  margin-left: 15px;
+  color: black;
+  font-weight: bold;
+  font-size: xx-large;
+}
+
+.gridContainer {
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-template-columns: 1fr 1.1fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-template-areas: "leftCol midCol rightCol";
+}
+
+.leftCol {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  align-items: flex-end;
+  grid-area: leftCol;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+}
+
+.midCol {
+  grid-area: midCol;
+}
+
+.rightCol {
+  /* background-color: white;
+  grid-area: rightCol;
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh; */
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  align-items: flex-start;
+  grid-area: rightCol;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+}

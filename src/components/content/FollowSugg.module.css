@@ -1,0 +1,13 @@
+.container {
+  display: inline-flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.title {
+  font-weight: 300;
+  padding: 20px;
+  border-width: 0 0 thin 0;
+  border-color: rgb(0, 0, 0, 0.1);
+  border-style: solid;
+}

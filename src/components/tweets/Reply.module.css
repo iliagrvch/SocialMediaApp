@@ -1,0 +1,10 @@
+.container {
+  display: flex;
+  flex-direction: row;
+}
+
+.content {
+  border-left: 3px gray solid;
+  display: flex;
+  flex-direction: column;
+}

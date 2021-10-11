@@ -1,0 +1,17 @@
+.nav {
+  right: 0;
+  display: inline-flex;
+  flex-direction: column;
+  top: 50px;
+  width: 100%;
+}
+
+.container {
+  position: relative;
+  width: 50%;
+}
+
+.logo {
+  padding: 15px;
+  left: 0;
+}

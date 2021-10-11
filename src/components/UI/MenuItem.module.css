@@ -1,0 +1,19 @@
+.menuItem {
+  font-size: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.menuItem:hover {
+  background-color: rgb(216, 216, 216);
+}
+
+.text {
+  margin: 5px;
+  font-size: 20px;
+}
+
+.icon {
+  margin-top: 5px;
+}
