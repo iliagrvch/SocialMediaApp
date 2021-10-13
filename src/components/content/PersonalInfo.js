@@ -4,13 +4,18 @@ import Wrapper from "../UI/Wrapper";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import AuthContext from "../../store/auth-context";
 import { useContext } from "react";
-import FollowButton from "../UI/FollowButton";
+import FollowButton from "../follow/FollowButton";
+import useHttp from "../../hooks/use-http";
+import { getUserData } from "../../lib/api";
 
 function PersonalInfo(props) {
   const authCtx = useContext(AuthContext);
+  const { sendRequest, data } = useHttp(getUserData);
   const { username, following, followers, tweetsCount, city, description, id } =
     props.data;
-  useEffect(() => {});
+  useEffect(() => {
+    sendRequest(authCtx.userId);
+  }, [sendRequest, authCtx.userId]);
   return (
     <Wrapper>
       <div className={styles.container}>
@@ -20,8 +25,8 @@ function PersonalInfo(props) {
           {city}
         </div>
         <div>{description}</div>
-        {authCtx.userId !== id && (
-          <FollowButton followingTo={following} userId={id} />
+        {data && authCtx.userId !== id && (
+          <FollowButton followingTo={data.following} userId={id} />
         )}
         <div className={styles.stats}>
           <div>

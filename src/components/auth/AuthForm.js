@@ -15,7 +15,7 @@ const AuthForm = () => {
   const cityRef = useRef();
   const passwordRef = useRef();
   const nameRef = useRef();
-  const { sendRequest, data } = useHttp(addUser);
+  const { sendRequest } = useHttp(addUser);
   const apiKey = "AIzaSyAkKVLOKgqpPWSerKv7AcDB1-HWA3EfK_U";
   const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();

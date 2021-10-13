@@ -20,11 +20,12 @@ function TweetList(props) {
       </Tweet>
     );
   }
+
   return (
     <div className={styles.container}>
       {props.tweets.map((tweet) => {
         const createdTweet = createTweet(tweet);
-        if (tweet.replyTo) {
+        if (tweet.replyTo && props.showReplyTo) {
           return (
             <Wrapper key={tweet.id}>
               <Reply

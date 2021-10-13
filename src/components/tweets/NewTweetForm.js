@@ -1,13 +1,12 @@
 import styles from "./NewTweetForm.module.css";
-import { Card } from "@mui/material";
-import { Button } from "@mui/material";
+
 import * as React from "react";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
 import useHttp from "../../hooks/use-http";
 import { addTweet } from "../../lib/api";
 import { useRef, useContext } from "react";
 import AuthContext from "../../store/auth-context";
-
+import ContainedButton from "../UI/ContainedButton";
 function NewTweetForm(props) {
   const textRef = useRef();
   const authCtx = useContext(AuthContext);
@@ -24,17 +23,22 @@ function NewTweetForm(props) {
     if (props.onSend) props.onSend();
   }
   return (
-    <Card sx={{ margin: 3 }}>
-      <div className={styles.container}>
-        <TextareaAutosize
-          style={{ minWidth: 400 }}
-          variant="filled"
-          minRows={4}
-          ref={textRef}
-        />
-        <Button onClick={newTweetHandler}>Tweet</Button>
+    <div className={styles.container}>
+      <TextareaAutosize
+        style={{ minWidth: 400 }}
+        variant="filled"
+        minRows={4}
+        ref={textRef}
+      />
+      <div className="vertical right-wrapper">
+        <ContainedButton
+          sx={{ width: "100px", margin: 1 }}
+          onClick={newTweetHandler}
+        >
+          Tweet
+        </ContainedButton>
       </div>
-    </Card>
+    </div>
   );
 }
 

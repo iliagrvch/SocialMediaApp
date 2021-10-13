@@ -8,7 +8,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import HelpIcon from "@mui/icons-material/Help";
 import LoginIcon from "@mui/icons-material/Login";
 import MenuItem from "../UI/MenuItem";
-import NewTweetButton from "../tweets/NewTweetBtn";
+import NewTweetAction from "../tweets/NewTweetAction";
 function NavBar() {
   const authCtx = useContext(AuthContext);
   function logoutHandler() {
@@ -52,7 +52,7 @@ function NavBar() {
             Logout
           </MenuItem>
         )}
-        {authCtx.isLoggedIn && <NewTweetButton />}
+        {authCtx.isLoggedIn && <NewTweetAction />}
       </List>
     </div>
   );

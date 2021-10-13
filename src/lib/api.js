@@ -83,9 +83,8 @@ export async function getTweetComments(commentsArr) {
       authorId: commentsArr[i].authorId,
       id: commentsArr[i].tweetId,
     });
-    tweetsArr.push(tweet);
+    if (tweet) tweetsArr.push(tweet);
   }
-
   return tweetsArr;
 }
 async function addComment(commentData) {
@@ -152,37 +151,74 @@ export async function getUserData(userId) {
 
   return user;
 }
+export async function getFollowSuggestions(userId) {
+  const response = await axios.get(`${FIREBASE_DOMAIN}/users.json`);
+  if (response && response.data) {
+    const currentUser = response.data[userId];
+    let usersArr = [];
+    for (const key in response.data) {
+      if (key !== userId && !currentUser.following.includes(key))
+        usersArr.push({ ...response.data[key], id: key });
+    }
+    usersArr.sort((a, b) => {
+      return a.followers - b.followers;
+    });
+
+    return usersArr;
+  } else {
+    return null;
+  }
+}
+
+export async function findUsers(queryStr) {
+  const response = await axios.get(`${FIREBASE_DOMAIN}/users.json`);
+  if (response && response.data) {
+    let res = [];
+    for (const key in response.data) {
+      if (
+        response.data[key].username
+          .toLowerCase()
+          .includes(queryStr.toLowerCase())
+      )
+        res.push({ id: key, ...response.data[key] });
+    }
+    console.log(res);
+    return res;
+  } else {
+    return null;
+  }
+}
 
 export async function toggleLike(tweetData) {
   const tweet = await getTweet({
     id: tweetData.id,
     authorId: tweetData.authorId,
   });
-  const likes = tweet.likes;
+  if (tweet) {
+    const likes = tweet.likes;
 
-  const includes = likes.includes(tweetData.userId);
-  if (!includes) {
-    likes.push(tweetData.userId);
-  } else {
-    const index = likes.indexOf(tweetData.userId);
-    likes.splice(index, 1);
+    const includes = likes.includes(tweetData.userId);
+    if (!includes) {
+      likes.push(tweetData.userId);
+    } else {
+      const index = likes.indexOf(tweetData.userId);
+      likes.splice(index, 1);
+    }
+
+    try {
+      await axios.patch(
+        `${FIREBASE_DOMAIN}/tweets/${tweetData.authorId}/${tweetData.id}.json`,
+        {
+          likes: JSON.stringify(likes),
+        },
+        {
+          "Content-Type": "application/json",
+        }
+      );
+    } catch (error) {
+      console.log(error);
+    }
   }
-
-  try {
-    const response = await axios.patch(
-      `${FIREBASE_DOMAIN}/tweets/${tweetData.userId}/${tweetData.id}.json`,
-      {
-        likes: JSON.stringify(likes),
-      },
-      {
-        "Content-Type": "application/json",
-      }
-    );
-  } catch (error) {
-    console.log(error);
-  }
-
-  return includes;
 }
 
 export async function toggleFollow(followData) {

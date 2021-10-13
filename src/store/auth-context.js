@@ -37,7 +37,7 @@ export const AuthContextProvider = (props) => {
     setToken(newToken);
 
     const remainingTime = calculateRemainingTime(expTime);
-    // setTimeout(logoutHandler, remainingTime);
+    setTimeout(logoutHandler, remainingTime);
   }
 
   const contextValue = {

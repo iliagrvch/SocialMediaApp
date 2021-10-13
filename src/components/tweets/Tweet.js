@@ -1,8 +1,6 @@
 import styles from "./Tweet.module.css";
-import IconBtn from "../UI/IconBtn";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
-import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
+import TweetStats from "./TweetStats";
 import useHttp from "../../hooks/use-http";
 import { toggleLike } from "../../lib/api";
 import AuthContext from "../../store/auth-context";
@@ -75,26 +73,13 @@ function Tweet(props) {
           <Wrapper>{props.children}</Wrapper>
         </div>
       </CardActionArea>
-      <div className={styles.stats}>
-        <div className={styles.btn}>
-          <IconBtn
-            icon={<ChatBubbleIcon sx={{ width: 18, height: 18 }} />}
-            selected={false}
-            count={props.comments.length}
-            onClick={tweetRedirectHandler}
-            toToggle={false}
-          />
-        </div>
-        <div className={styles.btn}>
-          <IconBtn
-            icon={<FavoriteIcon sx={{ width: 18, height: 18 }} />}
-            selected={props.likes.includes(authCtx.userId)}
-            count={props.likes.length}
-            onClick={likeHandler}
-            toToggle={true}
-          />
-        </div>
-      </div>
+      <TweetStats
+        onComment={tweetRedirectHandler}
+        onLike={likeHandler}
+        userId={authCtx.userId}
+        likes={props.likes}
+        comments={props.comments}
+      />
     </Fragment>
   );
 }

@@ -39,7 +39,13 @@ a {
 * {
   box-sizing: border-box;
 }
+.centered-wrapper {
+  align-items: center;
+}
 
+.right-wrapper {
+  align-items: flex-end;
+}
 .horizontal {
   display: inline-flex;
   flex-direction: row;

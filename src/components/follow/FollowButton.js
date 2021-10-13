@@ -1,14 +1,16 @@
 import { useState, useContext } from "react";
-import { Button } from "@mui/material";
+
 import { toggleFollow } from "../../lib/api";
 import AuthContext from "../../store/auth-context";
 import useHttp from "../../hooks/use-http";
-
+import ContainedButton from "../UI/ContainedButton";
 const FollowButton = (props) => {
   const authCtx = useContext(AuthContext);
-  const initialState = props.followingTo.includes(props.userId)
-    ? "Unfollow"
-    : "Follow";
+
+  const initialState =
+    props.followingTo && props.followingTo.includes(props.userId)
+      ? "Unfollow"
+      : "Follow";
   const [buttonState, setButtonState] = useState(initialState);
   const { sendRequest } = useHttp(toggleFollow);
 
@@ -18,13 +20,9 @@ const FollowButton = (props) => {
     setButtonState(val);
   }
   return (
-    <Button
-      sx={{ width: 100, margin: 1 }}
-      onClick={clickHandler}
-      variant="contained"
-    >
+    <ContainedButton sx={{ width: "100px" }} onClick={clickHandler}>
       {buttonState}
-    </Button>
+    </ContainedButton>
   );
 };
 

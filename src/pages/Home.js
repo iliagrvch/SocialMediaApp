@@ -8,37 +8,23 @@ import LoadingSpinner from "../components/UI/LoadingSpinner";
 
 function HomePage() {
   const authCtx = useContext(AuthContext);
-  const { sendRequest, status, data, error } = useHttp(getFollowingTweets);
+  const { sendRequest, status, data } = useHttp(getFollowingTweets);
 
   useEffect(() => {
     if (authCtx.userId) {
       sendRequest(authCtx.userId);
-      if (status === "pending") {
-        return (
-          <div className="centered">
-            <LoadingSpinner />
-          </div>
-        );
-      }
-      if (error) {
-        return <div>{error}</div>;
-      }
-
-      if (status === "completed" && !data) {
-        return (
-          <PageContent centered={true}>
-            <p>Follow people to see content on this page</p>
-          </PageContent>
-        );
-      }
     }
-  }, [sendRequest]);
+  }, [sendRequest, authCtx.userId]);
 
   return (
     <PageContent centered={true}>
-      {data
-        ? [<TweetsFeed key={0} tweets={data}></TweetsFeed>]
-        : [<LoadingSpinner key={0} />]}
+      {status === "pending" ? (
+        <LoadingSpinner />
+      ) : data ? (
+        <TweetsFeed tweets={data}></TweetsFeed>
+      ) : (
+        <p>Follow people to see content on this page</p>
+      )}
     </PageContent>
   );
 }

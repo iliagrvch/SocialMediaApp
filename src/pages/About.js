@@ -1,4 +1,3 @@
-import { Card } from "@mui/material";
 import PageContent from "../components/UI/PageContent";
 
 const projectDescription = (

@@ -1,6 +1,7 @@
-import { ToggleButton } from "@mui/material";
 import { useState, useEffect } from "react";
-import { Fragment } from "react";
+
+import { IconButton } from "@mui/material";
+
 function IconBtn(props) {
   const [selected, setSelected] = useState(props.selected);
   const [count, setCount] = useState(props.count);
@@ -14,17 +15,18 @@ function IconBtn(props) {
 
   useEffect(() => {}, [selected]);
   return (
-    <ToggleButton
-      sx={{ height: 30, margin: 1, borderWidth: 0 }}
-      value="check"
-      selected={selected}
-      onClick={selectHandler}
-    >
-      {[
-        <Fragment key={0}>{props.icon}</Fragment>,
-        <Fragment key={1}> {count}</Fragment>,
-      ]}
-    </ToggleButton>
+    <div className="horizontal centered-wrapper">
+      <IconButton
+        sx={{ height: 30, margin: 1, borderWidth: 0 }}
+        value="check"
+        selected={selected}
+        color={selected ? "secondary" : "default"}
+        onClick={selectHandler}
+      >
+        {props.icon}
+      </IconButton>
+      <div>{count}</div>
+    </div>
   );
 }
 

@@ -1,6 +1,5 @@
 import PageContent from "../components/UI/PageContent";
-import AuthContext from "../store/auth-context";
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import useHttp from "../hooks/use-http";
 import { getTweet, getTweetComments } from "../lib/api";
 import LoadingSpinner from "../components/UI/LoadingSpinner";
@@ -16,7 +15,6 @@ const TweetDetailsPage = () => {
     sendRequest: getComments,
     status: commentsStatus,
     data: commentsData,
-    error: commentsError,
   } = useHttp(getTweetComments);
 
   const {
@@ -52,7 +50,7 @@ const TweetDetailsPage = () => {
     }
   }, [commentsStatus, tweetStatus]);
   return (
-    <PageContent>
+    <PageContent centered={true}>
       {tweetData ? (
         <Tweet
           id={tweetData.id}
@@ -73,7 +71,11 @@ const TweetDetailsPage = () => {
       <NewTweetForm
         replyTo={{ tweetId: params.tweetId, authorId: params.userId }}
       />
-      {commentsData ? <TweetList tweets={commentsData} /> : <LoadingSpinner />}
+      {commentsData ? (
+        <TweetList showReplyTo={false} tweets={commentsData} />
+      ) : (
+        <LoadingSpinner />
+      )}
     </PageContent>
   );
 };

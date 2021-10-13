@@ -1,0 +1,10 @@
+.stats {
+  border-width: thin 0 0 0;
+  border-style: solid;
+  border-color: rgb(0, 0, 0, 0.1);
+  width: 100%;
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  gap: 45px;
+}

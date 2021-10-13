@@ -9,15 +9,17 @@ function PageContent(props) {
         </h2>
       </Wrapper>
       {props.children &&
-        (Array.isArray(props.children)
-          ? props.children.map((element, index) => {
-              return (
-                <Wrapper centered={props.centered} key={index}>
-                  {element}
-                </Wrapper>
-              );
-            })
-          : props.children)}
+        (Array.isArray(props.children) ? (
+          props.children.map((element, index) => {
+            return (
+              <Wrapper centered={props.centered} key={index}>
+                {element}
+              </Wrapper>
+            );
+          })
+        ) : (
+          <Wrapper centered={props.centered}>{props.children}</Wrapper>
+        ))}
     </div>
   );
 }
